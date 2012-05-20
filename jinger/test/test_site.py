@@ -7,8 +7,7 @@ from jinger.test import DIR_PLAYGROUND, JingerPlaygroundTest
 class SiteTest(JingerPlaygroundTest):
 
     def test_create_dir(self):
-        mysite = os.path.join(DIR_PLAYGROUND, 'mysite')
-        createdir(mysite)
+        mysite = createdir(DIR_PLAYGROUND, 'mysite')
         self.assertTrue(os.path.exists(mysite))
 
         # check that if the dir already exists, it raises an Exception

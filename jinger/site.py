@@ -9,11 +9,13 @@ from jinger import config
 
 logger = logging.getLogger('jinger')
 
-def createdir(path):
+def createdir(path, dirname):
+    path = os.path.join(path, dirname)
     if os.path.exists(path):
         raise Exception("A directory by name %s already exists" % path)
     logger.info("Creating path %s.." % path)
     os.mkdir(path)
+    return path
 
 
 def create_empty_site(sitename, cwd, sourcedir='templates', targetdir='public'):
@@ -30,19 +32,12 @@ def create_empty_site(sitename, cwd, sourcedir='templates', targetdir='public'):
     """
     logger.info("Creating site %s.." % sitename)
 
-    paths = map(lambda a: os.path.abspath(os.path.join(*a)),
-                [(cwd, sitename),
-                 (cwd, sitename, config.CONFIG_FILENAME),
-                 (cwd, sitename, sourcedir),
-                 (cwd, sitename, targetdir)])
+    sitedir = createdir(cwd, sitename)
 
-    sitedir, configfile, source, target = paths
+    createdir(sitedir, sourcedir)
+    createdir(sitedir, targetdir)
 
-    createdir(sitedir)
-    createdir(source)
-    createdir(target)
-
-    config.create(configfile, sourcedir, targetdir)
+    config.create(sitedir, sourcedir, targetdir)
 
     logger.info("DONE")
 
