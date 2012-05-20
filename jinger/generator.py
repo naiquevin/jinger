@@ -2,15 +2,16 @@ import os
 import logging
 from jinja2 import Environment, FileSystemLoader
 
-from jinger.config import conf
+from jinger.config import get_config
 
 logger = logging.getLogger('jinger')
 
-def generate_html(sourcedir, targetdir):
+def generate_html(sitedir, sourcedir, targetdir):
     """
     Compile Jinja2 templates in `sourcedir` to html files saved in `targetdir`
     preserving the directory structure.
     """
+    conf = get_config(sitedir)
     def filter_templates(x):
         return not x.startswith('base') and x.endswith('.html')
 

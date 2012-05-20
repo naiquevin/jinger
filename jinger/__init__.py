@@ -2,11 +2,14 @@ import logging
 
 # setup logging
 logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)-8s%(message)s',
-                    datefmt='%m-%d %H:%M')
+                    format='%(message)s')
 
-console = logging.StreamHandler()
+logger = logging.getLogger('jinger')
 
-logging.getLogger('jinger').addHandler(console)
-logging.getLogger('jinger').setLevel(logging.INFO)
+if not logger.handlers:
+    console = logging.StreamHandler()
+    logger.addHandler(console)
+
+logger.setLevel(logging.INFO)
+logger.propagate = 0
 
