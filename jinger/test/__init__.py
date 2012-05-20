@@ -13,7 +13,10 @@ def empty_playground():
     """
     Delete all file contents of the playground dir
     """
-    files = [os.path.join(DIR_PLAYGROUND, f) for f in os.listdir(DIR_PLAYGROUND)]
+    files = [os.path.join(DIR_PLAYGROUND, f) 
+             for f in os.listdir(DIR_PLAYGROUND) 
+             if f != '.gitignore']
+
     for f in files:
         if os.path.isfile(f):
             os.unlink(f)
