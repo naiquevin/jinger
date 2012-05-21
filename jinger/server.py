@@ -18,14 +18,20 @@ class JingerHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
+
         try:
-            self.wfile.write(get_html(self.path))
+            # TODO: handle request for favicon.ico
+            if self.path == '/favicon.ico':
+                pass
+            else:
+                self.wfile.write(get_html(self.path))
         except Http404:
             self.send_error(404, 'Template not found for path: %s' % self.path)
 
 
 def get_html(path):
     global env
+    path = '/index.html' if path == '/' else path
     templatepath = os.path.abspath(os.path.join(*tuple([s for s in path.split() if s])))
     try:
         return env.get_template(templatepath).render()
