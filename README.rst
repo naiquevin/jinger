@@ -50,7 +50,7 @@ Usage
 
 (These commands will not work currently as setup.py is yet to be added)
 
-.. code-block:: bash
+.. code-block::
 
     $ jinger startsite <sitename> [options]
 
@@ -58,12 +58,12 @@ Usage
       -s or --sourcedir name of the source template dir [default: templates]
       -t or --targetdir name of the target dir [default: public]
 
-.. code-block:: bash
+.. code-block::
 
     $ cd mysite
     $ jinger generate
 
-.. code-block:: bash
+.. code-block::
 
     $ cd mysite
     $ jinger runserver [options]
@@ -98,7 +98,7 @@ commands
 
 Note: These symlinks will be ignored by git
 
-.. code-block:: bash
+.. code-block::
 
     $ cd examples
     $ ln -s ../jinger/commands.py commands.py
@@ -112,7 +112,7 @@ Then open http://127.0.0.1:9000/ in your favourite browser.
 
 To compile templates to markup -
     
-.. code-block:: bash
+.. code-block::
 
     $ cd newsite
     $ python commands.py generate
@@ -123,7 +123,7 @@ Running Tests
 
 Use the test runner module to run tests as follows
 
-.. code-block:: bash
+.. code-block::
 
     $ cd jinger
     $ python testrunner.py # will run all tests in jinger/test
