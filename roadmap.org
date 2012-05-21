@@ -2,13 +2,13 @@
 
 ** Command line scripts
 
-*** TODO Create a "site" with required folders
+*** DONE Create a "site" with required folders
 
     command: $ jinger startsite <sitename> [options]
 
     [options] 
-    -s or --srcdir <name of the source template dir>
-    -t or --trgtdir <name of the target dir>
+    -s or --sourcedir <name of the source template dir>
+    -t or --targetdir <name of the target dir>
 
     Following files & dirs will be created
     - Create a new directory for the site with the specified name.
@@ -23,16 +23,16 @@
     command: $ jinger runserver [options]
 
     When issued from a directory, will - 
-    - check if the current dir is a jinger site. If no raise
+    - [ ] check if the current dir is a jinger site. If no raise
       an Exception
-    - if yes, start a server and serve html from the jinger
+    - [X] if yes, start a server and serve html from the jinger
       templates.
-    - Show colored logs like django
-    - Watch for changes
+    - [ ] Show colored logs like django
+    - [ ] Watch for changes
 
-*** TODO Compile templates to static html files
+*** DONE Compile templates to static html files
 
-    command: $ jinger compile [options]
+    command: $ jinger generate [options]
 
     When issued from inside a dir, it will:
     - compile all templates in the sourcedir into html files in the
@@ -40,7 +40,7 @@
 
 *** TODO Added support for js/(s)css files
 
-    command: $ jinger compile [options]
+    command: $ jinger generate [options]
 
     - Minify and combine css
     - Minify and combine js
