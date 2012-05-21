@@ -119,6 +119,10 @@ Use the test runner module to run tests as follows::
     $ python testrunner.py # will run all tests in jinger/test
     $ python testrunner.py site # will run jinger/test/test_site.py
 
+When the tests are run, directories and files will be created in ``playground``
+directory and will be deleted in tearDown. Ignore this dir if you don't need 
+to run tests.
+
 
 Roadmap
 -------
