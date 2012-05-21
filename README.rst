@@ -33,9 +33,7 @@ Features
 Dependencies
 ------------
 
-Nothing other than Jinja2.
-
-.. code-block:: bash
+Nothing other than Jinja2.::
 
     $ pip install Jinja2
 
@@ -50,7 +48,7 @@ Usage
 
 (These commands will not work currently as setup.py is yet to be added)
 
-.. code-block::
+Start a new site::
 
     $ jinger startsite <sitename> [options]
 
@@ -58,12 +56,12 @@ Usage
       -s or --sourcedir name of the source template dir [default: templates]
       -t or --targetdir name of the target dir [default: public]
 
-.. code-block::
+Generate html from templates::
 
     $ cd mysite
     $ jinger generate
 
-.. code-block::
+Run development server::
 
     $ cd mysite
     $ jinger runserver [options]
@@ -94,11 +92,7 @@ Examples can be run without installation as follows:
 
 To create a new site, first create a symlink of ``jinger/commands.py``
 inside ``examples`` or any other directory where you want to use the
-commands
-
-Note: These symlinks will be ignored by git
-
-.. code-block::
+commands (These symlinks will be ignored by git)::
 
     $ cd examples
     $ ln -s ../jinger/commands.py commands.py
@@ -110,10 +104,8 @@ Note: These symlinks will be ignored by git
 
 Then open http://127.0.0.1:9000/ in your favourite browser.
 
-To compile templates to markup -
+To compile templates to markup::
     
-.. code-block::
-
     $ cd newsite
     $ python commands.py generate
 
@@ -121,9 +113,7 @@ To compile templates to markup -
 Running Tests
 -------------
 
-Use the test runner module to run tests as follows
-
-.. code-block::
+Use the test runner module to run tests as follows::
 
     $ cd jinger
     $ python testrunner.py # will run all tests in jinger/test
