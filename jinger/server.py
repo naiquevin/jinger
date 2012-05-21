@@ -28,7 +28,7 @@ def get_html(path):
     global env
     templatepath = os.path.abspath(os.path.join(*tuple([s for s in path.split() if s])))
     try:
-        return env.get_template(templatepath).generate()
+        return env.get_template(templatepath).render()
     except IOError:
         raise Http404
 
