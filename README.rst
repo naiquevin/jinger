@@ -1,9 +1,6 @@
 Jinger - Jinga2 based static site generator
 ===========================================
 
-**Heads up!** Still a WIP
-
-
 What is Jinger ?
 ----------------
 
@@ -41,12 +38,22 @@ Nothing other than Jinja2.::
 Install
 -------
 
-TODO - Add installation instructions after adding setup.py
+Run following command to install (Virtualenv recommended)::
+
+    $ cd jinger
+    $ python setup.py install
+
+
+Uninstall
+---------
+
+Jinger can be uninstalled using pip
+
+    $ pip uninstall jinger
+
 
 Usage
 -----
-
-(These commands will not work currently as setup.py is yet to be added)
 
 Start a new site::
 
@@ -68,6 +75,10 @@ Run development server::
     
     [options]
     -p or --port
+
+Help::
+
+    $ jinger help
 
 
 Editing templates
