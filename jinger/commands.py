@@ -1,10 +1,10 @@
 import os
 from optparse import OptionParser
+import sys
 
 # For being able to test commands without intallation
 # TODO - Replace with an elegant method
 if __name__ == '__main__':
-    import sys
     sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/..')
 
 
@@ -44,6 +44,44 @@ def runserver():
     port = options.port if options.port is not None else 9000
     
     startserver(port)
+
+
+def help():
+    print """
+    Commands:
+
+    jinja startsite      Create directory structure for new static website
+    jinja generate       Generate markup from template files
+    jinja runserver      Start a development server
+
+    Options:
+    
+      startsite:
+        --sourcedir (-s) Name of the jinja2 templates directory (default: templates)
+        --targetdir (-t) Name of the compiled markup files (default: public)
+
+      runserver:
+        --port (-p)      Port to use for the development server (default: 9000)
+      
+    """
+
+
+def main():
+    try:
+        cmd = sys.argv[1]
+    except IndexError:
+        cmd = 'help'
+
+    if cmd == 'startsite':
+        startsite()
+    elif cmd == 'generate':
+        generate()
+    elif cmd == 'runserver':
+        runserver()
+    elif cmd in ['help']:
+        help()
+    else:
+        help()
     
 
 # For being able to test commands without intallation
