@@ -1,6 +1,8 @@
 import os
 from optparse import OptionParser
 import sys
+import logging
+
 
 # For being able to test commands without intallation
 # TODO - Replace with an elegant method
@@ -12,17 +14,19 @@ from jinger import site
 from jinger.config import get_config
 from jinger.generator import generate_html
 from jinger.server import startserver
+from jinger.exceptions import NotJingerPoweredError
 
+logger = logging.getLogger('jinger')
 
 def startsite():
     parser = OptionParser()
-    parser.add_option("-s", "--sourcedir", dest="sourcedir", 
+    parser.add_option("-s", "--sourcedir", dest="sourcedir",
                       help="Name of the dir for source template files (defaults to 'templates')")
     parser.add_option("-t", "--targetdir", dest="targetdir",
                       help="Name of the dir for generated html files (defaults to 'public')")
 
     (options, args) = parser.parse_args()
-    
+
     sitename = args[1]
     opts = dict([(k, v) for k, v in options.__dict__.iteritems() if v is not None])
 
@@ -30,40 +34,52 @@ def startsite():
 
 
 def generate():
-    conf = get_config(os.getcwd())
-    generate_html(os.getcwd(), conf['sourcedir'], conf['targetdir'])
+    try:
+        conf = get_config(os.getcwd())
+        generate_html(os.getcwd(), conf['sourcedir'], conf['targetdir'])
+    except NotJingerPoweredError:
+        logger.error("Error: Could not generate html as this doesn't seem to be a Jinger powered static site")
+        help()
 
 
 def runserver():
     parser = OptionParser()
-    parser.add_option("-p", "--port", dest="port", 
+    parser.add_option("-p", "--port", dest="port",
                       help="Port to use for localhost (127.0.0.1)")
-    
+
     (options, args) = parser.parse_args()
 
     port = options.port if options.port is not None else 9000
-    
-    startserver(port)
+
+    try:
+        startserver(port)
+    except NotJingerPoweredError:
+        logger.error("Error: Could not start server as this doesn't seem to be a Jinger powered static site")
+        help()
 
 
 def help():
-    print """
-    Commands:
+    help_msg = """
+    Available Commands:
 
     jinja startsite      Create directory structure for new static website
     jinja generate       Generate markup from template files
     jinja runserver      Start a development server
 
     Options:
-    
+
       startsite:
         --sourcedir (-s) Name of the jinja2 templates directory (default: templates)
         --targetdir (-t) Name of the compiled markup files (default: public)
 
       runserver:
         --port (-p)      Port to use for the development server (default: 9000)
-      
+
+    Note: The commands `generate` and `runserver` need to be run from a directory
+    which is a jinger powered website.
+
     """
+    logger.info(help_msg)
 
 
 def main():
@@ -82,7 +98,7 @@ def main():
         help()
     else:
         help()
-    
+
 
 # For being able to test commands without intallation
 # TODO - Replace with an elegant method

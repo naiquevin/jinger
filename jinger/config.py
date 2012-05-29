@@ -2,6 +2,8 @@ import os
 import json
 import logging
 
+from jinger.exceptions import NotJingerPoweredError
+
 
 logger = logging.getLogger('jinger')
 
@@ -20,6 +22,9 @@ def get_config(sitepath):
     """
     Get config dict
     """
-    fp = open(os.path.join(sitepath, CONFIG_FILENAME))
-    return json.load(fp)
-    
+    try:
+        fp = open(os.path.join(sitepath, CONFIG_FILENAME))
+        return json.load(fp)
+    except IOError:
+        raise NotJingerPoweredError
+
