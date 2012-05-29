@@ -27,10 +27,13 @@ def startsite():
 
     (options, args) = parser.parse_args()
 
-    sitename = args[1]
-    opts = dict([(k, v) for k, v in options.__dict__.iteritems() if v is not None])
-
-    site.create_empty_site(sitename, os.getcwd(), **opts)
+    try:
+        sitename = args[1]
+        opts = dict([(k, v) for k, v in options.__dict__.iteritems() if v is not None])
+        site.create_empty_site(sitename, os.getcwd(), **opts)
+    except IndexError:
+        logger.error("Error: Please specify a name for the jinger powered site.")
+        help()
 
 
 def generate():
