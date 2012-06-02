@@ -5,16 +5,6 @@ from jinja2 import Environment, FileSystemLoader
 from jinger.config import get_config
 
 
-env = None
-
-def get_env():
-    global env
-    if env is None:
-        conf = get_config(os.getcwd())
-        env = Environment(loader=FileSystemLoader(conf['sourcedir']))
-    return env
-
-
 class Http404(Exception):
     pass
 
@@ -66,7 +56,8 @@ class JinjaTemplateContentMixin(object):
     def get_env(cls, rootpath):
         if cls.env is None:
             conf = get_config(rootpath)
-            cls.env = Environment(loader=FileSystemLoader(os.path.join(rootpath, conf['sourcedir'])))
+            templatepath = os.path.join(rootpath, conf['sourcedir'])
+            cls.env = Environment(loader=FileSystemLoader(templatepath))
         return cls.env
 
     def get_content(self):
