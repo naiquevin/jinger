@@ -3,23 +3,24 @@ import logging
 import shutil
 from jinja2 import Environment, FileSystemLoader
 
-from jinger.config import get_config
 
 logger = logging.getLogger('jinger')
 
-def generate_html(sitedir, sourcedir, targetdir):
+
+def generate_html(sitedir, conf):
     """
-    Compile Jinja2 templates in `sourcedir` to html files saved in `targetdir`
-    preserving the directory structure.
+    Compile Jinja2 templates in `sourcedir` to html files saved in
+    `targetdir` preserving the directory structure.
     """
-    conf = get_config(sitedir)
+    sourcedir, targetdir = conf['sourcedir'], conf['targetdir']
     def filter_templates(x):
         return not x.startswith('base') and x.endswith('.html')
 
     env = Environment(loader=FileSystemLoader(conf['sourcedir']))    
     templates = env.list_templates(filter_func=filter_templates)
     for t in templates:
-        filepath = os.path.join(targetdir, *tuple(t.split(os.path.sep)))
+        filepath = os.path.join(targetdir,
+                                *tuple(t.split(os.path.sep)))
         dirname = os.path.dirname(filepath)
         if not os.path.exists(dirname):
             os.makedirs(dirname)

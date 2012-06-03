@@ -16,7 +16,9 @@ from jinger.generator import generate_html, generate_webassets
 from jinger.server import startserver
 from jinger.exceptions import NotJingerPoweredError
 
+
 logger = logging.getLogger('jinger')
+
 
 def startsite():
     parser = OptionParser()
@@ -39,7 +41,12 @@ def startsite():
 def generate():
     try:
         conf = get_config(os.getcwd())
-        generate_html(os.getcwd(), conf['sourcedir'], conf['targetdir'])
+
+        # delete contents of the target dir
+        
+        
+
+        generate_html(os.getcwd(), conf)
         generate_webassets(os.getcwd(), conf)
     except NotJingerPoweredError:
         logger.error("Error: Could not generate html as this doesn't seem to be a Jinger powered static site")
