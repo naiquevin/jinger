@@ -36,7 +36,7 @@ class WebContentTest(JingerPlaygroundTest):
 
 
     def test_css_content(self):
-        with open(os.path.join(self.site, 'styles.css'), 'w') as f:
+        with open(os.path.join(self.site, 'webassets', 'styles.css'), 'w') as f:
             f.write('html, body {}')
         content = server.CSSContent('/styles.css', rootpath=self.site)
         self.assertEqual(content.content_type, 'text/css')
@@ -44,7 +44,7 @@ class WebContentTest(JingerPlaygroundTest):
 
 
     def test_js_content(self):
-        with open(os.path.join(self.site, 'main.js'), 'w') as f:
+        with open(os.path.join(self.site, 'webassets', 'main.js'), 'w') as f:
             f.write('var MYSITE = {};')
         content = server.JSContent('/main.js', rootpath=self.site)
         self.assertEqual(content.content_type, 'text/javascript')
@@ -52,7 +52,7 @@ class WebContentTest(JingerPlaygroundTest):
 
 
     def test_image_content(self):
-        with open(os.path.join(self.site, 'logo.png'), 'w') as f:
+        with open(os.path.join(self.site, 'webassets', 'logo.png'), 'w') as f:
             f.write('100011')
         content = server.ImageContent('/logo.png', rootpath=self.site)
         self.assertEqual(content.content_type, 'image/png')

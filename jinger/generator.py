@@ -1,5 +1,6 @@
 import os
 import logging
+import shutil
 from jinja2 import Environment, FileSystemLoader
 
 from jinger.config import get_config
@@ -25,4 +26,16 @@ def generate_html(sitedir, sourcedir, targetdir):
         with open(filepath, 'w') as f:
             f.writelines(env.get_template(t).generate())
             logger.info("Generated %s" % filepath)
-    
+
+
+def generate_webassets(sitedir, conf):
+    """
+    Generate or rather copy the contents of the `webassets` 
+    directory to the `public` directory
+    """
+    ignore = shutil.ignore_patterns(('*~', '.gitignore'))
+    for p in os.listdir(os.path.join(sitedir, 'webassets')):
+        srcpath = os.path.join(sitedir, 'webassets', p)
+        trgtpath = os.path.join(sitedir, conf['targetdir'], p)
+        shutil.copytree(srcpath, trgtpath, ignore=ignore)
+

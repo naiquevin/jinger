@@ -26,9 +26,10 @@ def create_empty_site(sitename, cwd, sourcedir='templates', targetdir='public'):
     `sourcedir` is for jinja2 template files
     `targetdir` is where the compiled html files will be placed.
 
-    Additionally, a json config file will also be created with 
+    Additionally, a json config file will be created with 
     settings for the `sourcedir` and the `targetdir` so that these
-    may be changed later on too.
+    may be changed later on too and a directory named `webassets` 
+    will be added where css, js etc files can be placed
     """
     logger.info("Creating site %s.." % sitename)
 
@@ -36,6 +37,8 @@ def create_empty_site(sitename, cwd, sourcedir='templates', targetdir='public'):
 
     createdir(sitedir, sourcedir)
     createdir(sitedir, targetdir)
+
+    createdir(sitedir, 'webassets')
 
     config.create(sitedir, sourcedir, targetdir)
 

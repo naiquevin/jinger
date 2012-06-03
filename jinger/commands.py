@@ -12,7 +12,7 @@ if __name__ == '__main__':
 
 from jinger import site
 from jinger.config import get_config
-from jinger.generator import generate_html
+from jinger.generator import generate_html, generate_webassets
 from jinger.server import startserver
 from jinger.exceptions import NotJingerPoweredError
 
@@ -40,6 +40,7 @@ def generate():
     try:
         conf = get_config(os.getcwd())
         generate_html(os.getcwd(), conf['sourcedir'], conf['targetdir'])
+        generate_webassets(os.getcwd(), conf)
     except NotJingerPoweredError:
         logger.error("Error: Could not generate html as this doesn't seem to be a Jinger powered static site")
         help()

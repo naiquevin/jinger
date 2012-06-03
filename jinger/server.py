@@ -82,7 +82,7 @@ class WebAssetsContentMixin(object):
     
     def get_content(self):
         try:
-            filepath = os.path.join(self.rootpath, self.path.strip('/'))
+            filepath = os.path.join(self.rootpath, 'webassets', self.path.strip('/'))
             with open(filepath) as f:
                 return f.read()
         except IOError:
