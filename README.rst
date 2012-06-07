@@ -96,6 +96,50 @@ See ``examples/mysite`` for more info and next section for running the
 examples.
 
 
+Webassets
+---------
+
+When jinger creates a new site upon running the ``startsite`` command,
+a directory named ``webassets`` is also created where you should place
+any css, js, images etc for your site. Note that the choice of name
+for this directory is not configurable unlike the ``sourcedir`` and
+``targetdir`` directories.  This is because the generate command will
+copy all the contents of this dir into the ``targetdir`` from where it
+will be served.
+
+for eg. if you have following files and directories inside webassets ::
+
+    webassets/
+             js/
+               main.js
+             css/
+                styles.css
+             images/
+                   logo.png
+
+After running ``generate`` these will be copied to ``targetdir`` as ::
+
+    public/
+          js/
+            main.js
+          css/
+             styles.css
+          images/
+                logo.png
+
+
+Note however that when running the development server, these files
+will be served directly from inside ``webassets``.
+
+Including the webassets in your jinja2 template files
+-----------------------------------------------------
+
+To include the css/js/images in the templates, just use their path
+relative to ``webassets`` such as ::
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+
+
 Running the example
 -------------------
 
