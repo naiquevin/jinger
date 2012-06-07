@@ -41,11 +41,6 @@ def startsite():
 def generate():
     try:
         conf = get_config(os.getcwd())
-
-        # delete contents of the target dir
-        
-        
-
         generate_html(os.getcwd(), conf)
         generate_webassets(os.getcwd(), conf)
     except NotJingerPoweredError:

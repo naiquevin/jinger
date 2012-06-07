@@ -38,5 +38,12 @@ def generate_webassets(sitedir, conf):
     for p in os.listdir(os.path.join(sitedir, 'webassets')):
         srcpath = os.path.join(sitedir, 'webassets', p)
         trgtpath = os.path.join(sitedir, conf['targetdir'], p)
+
+        if os.path.exists(trgtpath):
+            if os.path.isfile(trgtpath):
+                os.unlink(trgtpath)
+            else:
+                shutil.rmtree(trgtpath)
+
         shutil.copytree(srcpath, trgtpath, ignore=ignore)
 
