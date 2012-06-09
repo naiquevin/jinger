@@ -1,4 +1,5 @@
 {
-    "targetdir": "public", 
-    "sourcedir": "templates"
+    "targetdir": "public",
+    "sourcedir": "templates",
+    "skip_templates": ["base*.html", "_*.html"]
 }
