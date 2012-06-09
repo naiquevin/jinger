@@ -1,10 +1,15 @@
 import os
 import logging
 import shutil
+import fnmatch
+
 from jinja2 import Environment, FileSystemLoader
 
 
 logger = logging.getLogger('jinger')
+
+
+
 
 
 def generate_html(sitedir, conf):
@@ -13,11 +18,19 @@ def generate_html(sitedir, conf):
     `targetdir` preserving the directory structure.
     """
     sourcedir, targetdir = conf['sourcedir'], conf['targetdir']
-    def filter_templates(x):
-        return not x.startswith('base') and x.endswith('.html')
+
+    def templates_filter(filename):
+        """
+        Function for filtering the templates as per the 
+        `skip_patterns` specified in the config
+        """
+        return filename.startswith('.html') and \
+            not reduce(lambda x, y: x or fnmatch.fnmatch(filename, y),
+                       conf['skip_templates'],
+                       False)
 
     env = Environment(loader=FileSystemLoader(conf['sourcedir']))    
-    templates = env.list_templates(filter_func=filter_templates)
+    templates = env.list_templates(filter_func=templates_filter)
     for t in templates:
         filepath = os.path.join(targetdir,
                                 *tuple(t.split(os.path.sep)))

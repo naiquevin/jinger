@@ -17,4 +17,5 @@ class ConfigTest(JingerPlaygroundTest):
         
         self.assertEqual(conf['sourcedir'], 'templates')
         self.assertEqual(conf['targetdir'], 'public')
+        self.assertEqual(conf['skip_templates'], ['base*.html', '_*.html'])
         

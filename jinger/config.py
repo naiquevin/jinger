@@ -13,7 +13,10 @@ CONFIG_FILENAME = 'config.json'
 def create(path, sourcedir, targetdir):
     confpath = os.path.join(path, CONFIG_FILENAME)
     with open(confpath, 'w') as c:
-        json.dump({"sourcedir": sourcedir, "targetdir": targetdir}, c, indent=4)
+        conf = {"sourcedir": sourcedir, 
+                "targetdir": targetdir,
+                "skip_templates": ['base*.html', '_*.html']}
+        json.dump(conf, c, indent=4)
         logger.info("Writing config file %s.." % path)
     return confpath
 
