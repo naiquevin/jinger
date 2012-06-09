@@ -5,7 +5,7 @@ What is Jinger ?
 ----------------
 
 Jinger is a static site (not blog) generator that brings the power and
-convenience of Jinja2_ python template engine for developing static html
+convenience of `Jinja2`_ python template engine for developing static html
 sites. Template inheritance was the main motivation behind developing it,
 therefore the use of jinja2 and hence the name ``Jinger``!
 
@@ -38,7 +38,7 @@ Nothing other than Jinja2.::
 Install
 -------
 
-Run following command to install (Virtualenv recommended)::
+Run following command to install (recommended to be run inside a virtualenv)::
 
     $ cd jinger
     $ python setup.py install
@@ -84,15 +84,32 @@ Help::
 Editing templates
 -----------------
 
-TODO
+You can do almost everything that jinja2 supports. Ofcourse, 
+you won't be able to use context variables as this is a static 
+site generator after all :-)
 
-Html directory tree will be same as the templates directory tree
+Check `Jinja2's Template Designers'`_ Documentation for more on
+editing.
 
-Important: Templates starting with ``base`` are expected to be base
-templates which other templates will extend and hence will not be
-generated to html.
 
-See ``examples/mysite`` for more info and next section for running the
+Generating Templates
+--------------------
+
+Html directory tree will be same as the templates directory tree.
+
+Typically one might want that some types of templates viz. base and
+partial templates should not be compiled when the generate command is
+run. This can be configured via the ``skip_templates`` setting in the
+json config file. As a default setting, files of pattern "base*.html"
+(base templates) and "_*.html" (partial templates) are ignored. If you
+are happy with the default settings, then name your base templates and
+partial templates according to this. Otherwise you are free to modify
+the setting to your taste.
+
+Important: This setting is in form of a list of Unix style wildcard
+patterns (and NOT regex).
+
+See ``examples/mysite`` for more info and further section for running the
 examples.
 
 
@@ -193,4 +210,5 @@ Please use github issue tracker to submit any bugs
 All kinds of feedback is welcome :)
 
 .. _Jinga2: http://jinja.pocoo.org/
+.. _Jinja2's Template Designers': http://jinja.pocoo.org/docs/templates/
 
