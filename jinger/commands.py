@@ -107,12 +107,6 @@ def main():
 
 
 # For being able to test commands without intallation
-# TODO - Replace with an elegant method
 if __name__ == '__main__':
-    cmd = sys.argv[1]
-    if cmd == 'startsite':
-        startsite()
-    elif cmd == 'generate':
-        generate()
-    elif cmd == 'runserver':
-        runserver()
+    main()
+
