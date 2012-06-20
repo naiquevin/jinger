@@ -24,7 +24,7 @@ def generate_html(sitedir, conf):
         Function for filtering the templates as per the 
         `skip_patterns` specified in the config
         """
-        return filename.startswith('.html') and \
+        return filename.endswith('.html') and \
             not reduce(lambda x, y: x or fnmatch.fnmatch(filename, y),
                        conf['skip_templates'],
                        False)
